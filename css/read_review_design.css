@@ -1,0 +1,145 @@
+﻿/*Container för body innehåll*/
+.body_wrap{
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
+	width: 635px;
+	height:auto;
+	margin-top:40px;
+}
+
+
+/*Rubriktext för artikel*/
+#header{
+	font-family: 'Roboto', sans-serif;
+	font-size:26px;
+	background:#191919;
+	color:white;
+	width: 635px;
+	height:auto;
+	margin-top: -30px;
+	border-radius:2px;
+}
+
+/*Manipulering av position av rubriktext*/
+#header > h1{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	margin: 0;
+	margin-top: 30px;
+}
+
+/*Positionering av rubriksbild*/
+.review_img{
+	position:relative;
+	width:100%;
+	margin-top: -7px;
+}
+img:hover { 
+    opacity: 0.5;
+}
+
+
+/*Container för text*/
+.text_wrap{
+	width:100%;
+	height:auto;
+}
+
+/*Typsnitt och storlekt av text*/
+.text_wrap > p{
+	font-family: 'Open Sans', sans-serif;
+	font-weight:300;
+	padding-left:15px;
+	padding-right:15px;
+}
+
+/*Container för split_wrap*/
+#split_wrap{
+	width:100%;
+	height:300px;
+}
+
+/*Bilddel*/
+#small_img{
+	position:relative;
+	width:45%;
+	float:right;
+	height:200px;
+	background:#191919;
+}
+
+#small_img > img{
+	width:100%;
+}
+
+/*undertext */
+#small_img > #small_img_text{
+	color:#ffffff;
+	padding-left:10px;
+	padding-right:10px;
+	margin-top:2px;
+	font-family: 'Open Sans', sans-serif;
+	font-style:italic;
+}
+
+/*ett block av text*/
+#text_block{
+	width:45%;
+	float:left;
+	padding-left:15px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:300;
+	margin-top: -20px;
+}
+
+/*Design av betygssättning*/
+#score_wrap{
+	margin-top: 40px;
+	float: left;
+	clear: none;
+	width: 100%;
+	height: 75px;
+	margin-left:-15px;
+}
+
+/*Betygscontainer*/
+#score{
+	float:left;
+	padding-left:15px;
+	width:15%;
+	height:75px;
+	background:#52bcfd;
+	margin-left:15px;
+}
+
+/*Betygsnummer*/
+#score > p{
+	color:white;
+	font-size:38px;
+	font-family: 'Roboto', sans-serif;
+	font-weight:900;
+	margin-top:0px;
+	padding-top: 15px;
+}
+
+/*Text i container*/
+#score_text{
+	font-family: 'Open Sans', sans-serif;
+	font-style:italic;
+	float:left;
+	width:75%;
+}
+
+#score_text > p{
+	margin-left: 15px;
+	margin-top: 0px;
+	height: 10px;
+}
+
+#score_headline{
+	font-weight:900;
+	font-style:normal;
+	
+}

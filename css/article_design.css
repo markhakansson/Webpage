@@ -1,0 +1,87 @@
+
+/*Ändrar typsnitt för rubrik text, ger den färgen vit och bestämmer dimensioner */
+#header{
+	font-family: 'Roboto', sans-serif;
+	font-size:26px;
+	background:#191919;
+	color:white;
+	width: 635px;
+	height:60px;
+	margin-top:0;
+	border-radius:2px;
+	padding-bottom:5px;
+}
+
+/* Vadderar rubriken så den inte kramar kanterna */
+#header > h1{
+	padding-left:15px;
+	padding-right:15px;
+}
+
+/*Skapar dimensionerna för huvudartikeln / recensionen*/
+#art_head{
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	top: 30px;
+	width: 610px;
+	height: 320px;
+	padding-bottom:20px;
+}
+
+/* Dikterar vilket lager som bilden har */
+#art_head img{
+	z-index:0;
+}
+
+/* Textruta över bild */
+#art_text_box{
+	position: absolute;
+	width: 95%;
+	height: 80px;
+	color: white;
+	margin-top: 206px;
+	z-index: 2;
+	font-family: 'Roboto', sans-serif;
+	color: #F3F3F3;
+	padding-left: 15px;
+}
+
+/* Textstorlek för rubrik över bild */
+#art_header{
+	font-size: 26px;
+	height: 10px;
+}
+
+/* Textstorlek för informativ text */
+#art_text{
+	font-size:14px;
+}
+
+/* Bakgrund för text */
+#text_background{
+	width: 610px;
+	background: black;
+	height: 100px;
+	z-index: 1;
+	position: absolute;
+	margin-top: 219px;
+	opacity:0.5;
+}
+
+/* allt inom banner_wrap är 30px från den övre taggen */
+.banner_wrap{
+	margin-top:30px;
+}
+
+
+/* Grafisk layout för bakgrunden av alla bilder */
+.box{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background: #F3F3F3;
+	border-radius:2px;
+	padding:15px;
+}
+
+
+

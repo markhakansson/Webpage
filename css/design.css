@@ -1,0 +1,243 @@
+/* Avstånd mellan avlånga objekt */
+.distance{
+	margin-top:40px;
+}
+
+
+/* Storlek, typsnitt etc för logotyp */
+.logo{
+	width:635px;
+	height:95px;
+	margin-left:auto;
+	margin-right:auto;
+	font-weight:900;
+	font-size:80px;
+	font-family: 'Roboto', sans-serif;
+	color:#ffffff;
+	background:#191919;
+	border-radius:2px;
+	margin-top:-40px;
+}
+
+/* Avstånd från kant */
+.logo > p{
+	margin-left:15px;
+}
+
+/* Sätt maxstorlekt samt storlekt på bildet ifall omskalning av sida */
+img {
+    max-width: 640px;
+	max-height: 100%;
+	width: 100%;
+}
+
+/* Centrerar alla objekt som har klassen */
+.centring{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+/* Meny layout */
+.menu{
+	width:100%;
+	height:30px;
+	background:#191919;
+	margin-top: 40px;
+}
+
+/* wrap för knappar i meny */
+.item_wrap{
+	position:relative;
+	top:5px;
+	width:635px;
+	height:25px;
+}
+
+/* Knapp i meny */
+.item{
+	font-family: 'Roboto', sans-serif;
+	display:inline-block;
+	width:75px;
+	height:25px;
+	color:white;
+	text-align:center;
+	color:#fff;
+}
+
+/* Länkfärg */
+.item a{
+	text-decoration: none;
+	color:white;
+}
+
+/* Länkfärg vid hover */
+.item a:hover{
+	color:#52bcfd;
+}
+
+/* sidans bredd */
+.body_wrap{
+	width:750px;
+	height:1000px;
+}
+
+/* Grafisk design för objektbakgrund */
+.box{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background: #F3F3F3;
+	border-radius:2px;
+	padding:15px;
+}
+
+/* Container för alla element inom denna*/
+.banner_wrap{
+	position:relative;
+	width:100%;
+	height:250px;
+	top:-10px;
+}
+
+/* Container för kvadratiska objekt */
+.banner{
+	border-radius:2px;
+	position: relative;
+	float: left;
+	width: 35%;
+	top: 20%;
+	height: 210px;
+	margin-left: 7.4%;
+	
+}
+
+#prod_banner{
+	margin-top:0px;
+}
+
+#prod_first_item{
+	width: 25%;
+    height: 175px;
+	margin-left:0%;
+	margin-top: 30px;
+}
+
+#prod_item{
+	width: 25%;
+	margin-left: 6.73%;
+    height: 175px;
+	margin-top: 30px;
+}
+
+#prod_img{
+	height: 106px;
+
+}
+
+#prod_bread{
+	top: -5px;
+	font-size: 14px;
+	padding-top:10px;
+}
+
+#prod_body{
+	width: 780px;
+	margin-top:10px;
+}
+
+/*Rubriktext för kvadratiska objekt*/
+.banner_header{
+	font-family: 'Roboto', sans-serif;
+	padding-left: 8px;
+	color: #5D5D5D;
+	margin-top: -4px;
+	font-size: 12px;
+}
+
+/*Beskrivande text för kvadratiska objekt*/
+.banner_text{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	padding-left: 7px;
+	color: #5D5D5D;
+	margin-top: -14px;
+	padding-right: 7px;
+}
+
+/*Container för bilder för kvadratiska objekt*/
+.banner_imgwrap{
+	width:100%;
+	height:150px;
+	background:white;
+}
+
+/*Container för avlånga objekt*/
+.sub_wrap{
+	position:relative;
+	width:100%;
+	height:500px;
+}
+
+/*Rektangulära objekt*/
+.sub_ban{
+	width: 82%;
+	height: 100px;
+	margin-top: 10%;
+	margin-left: 7%;
+}
+
+/*Container för rubrik för rektangulära objekt*/
+.sub_headline_wrap{
+	height: 35px;
+	display: inline-block;
+	float: left;
+	font-family: 'Roboto', sans-serif;
+	margin-top: -16px;
+	margin-left: 15px;
+	color: #5D5D5D;
+	font-weight: 700;
+}
+
+/*Container för text för rektangulära objekt*/
+.sub_text_wrap{
+	font-size: 12px;
+	color: #5D5D5D;
+	font-weight: 400;
+	font-family: 'Roboto', sans-serif;
+	margin-top: 25px;
+	margin-left: 188px;
+	position: relative;
+	text-decoration:none;
+}
+
+
+/*Bildstorlek för rektangulära objekt*/
+.sub_img{
+	width: 28%;
+	position: relative;
+	display: inline;
+	float: left;
+}
+
+/*Avståndet från det första rektangulära objektet*/
+.sub_sub{
+	margin-top:6%;
+}
+
+/*Tar bort border från a taggar*/
+a{
+	outline: 0;
+}
+
+/*tar bort effekter från hover*/
+a:hover{
+	text-decoration:none;
+}
+
+/*tar bort effekter från länkar*/
+a:link{
+	text-decoration:none;
+}
+
+/*Tar bort effekter från besökta länkar*/
+a:visited{
+	text-decoration:none;
+}
