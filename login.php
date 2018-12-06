@@ -43,7 +43,7 @@
     		</div>
 
 	</form>
-<a href="reg/register.php">Register here</a>
+<a href="register/register.php">Register here</a>
 </div>';
 }
 ?>
