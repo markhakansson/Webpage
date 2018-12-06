@@ -1,7 +1,7 @@
 <?php
 	session_start();
     header('Content-Type: text/html; charset=ISO-8859-1');
-	include 'header.php'
+	include '../header.php'
 ?>
 
 <!DOCTYPE html>
@@ -20,16 +20,6 @@
     	<input type="password" name="password">
    	</div>
 
-	<div>  
-		<label for="robot">Are you sure you want to terminate your account?</label>
-        <input type="radio" name="confirmation"value="no"> No
-        <span class="required">';
-
-		<input type="radio" name="confirmation" value="yes"> Yes
-		<span class = "required">';
-		</span><br>
-    </div>
-
 	<div>
         <input type="submit" name="submit" value="Terminate account">
         <span class="required">
@@ -41,7 +31,7 @@
 
 <?php 
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
-		if(!empty($_POST["password"]) and $_POST["robot"] == "yes") {
+		if(!empty($_POST["password"])) {
 			echo "Goodday to you";
 		} else {
 			echo "Didn't work :(";
