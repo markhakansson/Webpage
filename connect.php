@@ -1,7 +1,7 @@
 <?php
-	$servername = "utbweb.its.ltu.se:3306";
-	$username = "930807";
-	$password = "930807";
+	$servername = "localhost";
+	$username = "root";
+	$password = "root";
 	$database = "db930807";
 
 try {
