@@ -16,7 +16,7 @@ include 'connect.php';
 			}
 
 			if(!empty($_POST["password"])) {
-				$password = $_POST["password"];
+				$password = $_POST["password"]; // use htmlspecialchars here
 			} else {
 				$passwordErr = "Password field is empty!";
 			}

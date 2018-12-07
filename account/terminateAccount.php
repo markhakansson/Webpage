@@ -6,21 +6,34 @@
 
 	$password = $passwordErr = "";
 	
-	if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST["userId"])) {
+	// Should only delete from users and reviews
+	// because we might need information on orders
+	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION["userId"])) {
 		if(!empty($_POST["password"])) {
-			$password = $_POST["password"];
+			$password = $_POST["password"]; // use htmlspecialchars here
 		} else {
 			$passwordErr = "Password field is empty!";
 		}
-	
-		// Should only delete from users and reviews
-		// because we might need information on orders
-		if(!empty($passwordErr)) {
-			
-		}	
+		
+		$idQuery = "SELECT user_id FROM users WHERE username = ? AND password = ?";
+		$idQuery = $pdo->prepare($idQuery);
+		$idQuery->execute([$_SESSION["userId"], $password]);
+		$userId = $idQuery->fetchColumn;
+		
+		// Checks for matching username/password
+		if($userID && !$passwordErr ) {
+			echo "Nothing happened. This feature is not implemented yet.";
+			//TODO: remove account and sensitive data.
+			//Might be good to use an "active" column in users and customers
+
+			//session_unset();
+			//session_destroy();
+		} else {
+			$passwordErr = "Wrong password!";
+		}
 	}
 
- 	
+	
 
 ?>
 
