@@ -10,6 +10,7 @@ include 'connect.php';
             if(!empty($_POST["username"])) {
 				$username = trim($_POST["username"]);
 				$username = stripslashes($username);
+				$username = strtolower($username);
 				$username = htmlspecialchars($username);
 			} else {
 				$usernameErr = "Username field is empty!";
