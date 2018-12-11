@@ -23,12 +23,9 @@
     try{
         $stmt = $pdo->prepare("SELECT * FROM order_specifics WHERE order_id = ?");
         $stmt->execute([$orderId]);
-        
-		$pdo2 = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-		$pdo2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
+        	
         if($stmt->rowCount()) {
-
+            
             ?>
             <table border = "0">
             <tr>
@@ -39,13 +36,19 @@
             <th>Total price</th>
             </tr>
             <?php
-           
-            // Problem here is that the same PDO is used for queries. Gives no results in $prodQuery.... 
-            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            
+            $result = $stmt->fetchAll();
+            $sum = 0;
+
+            foreach($result as $row) {
                 $prodId = $row["product_id"];
-                $prodQuery = $pdo2->prepare("SELECT * FROM products WHERE product_id = ?");
-                $prodQuery->execute([$productId]);
-                $product = $prodQuery->fetch(PDO::FETCH_ASSOC);
+                $prodAmount = $row["amount"];
+
+                $prodQuery = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
+                $prodQuery->execute([$prodId]);
+                $product = $prodQuery->fetch();
+                
+                $sum = $sum + $product["price"];               
 
                 ?>
                 <tr>
@@ -53,11 +56,15 @@
                 <td><?php echo $prodId;?></td>
                 <td><?php echo $row["amount"];?></td>
                 <td><?php echo $product["price"];?></td>
-                <td><?php echo $row["amount"]*$product["price"];?></td>
+                <td><?php echo $prodAmount*$product["price"];?></td>
                 </tr>
-
                 <?php
             } ?>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total sum:</td>
+            <td><?php echo $sum;?></td>
             </table>
             <?php
         }

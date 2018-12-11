@@ -21,7 +21,8 @@
     	    $query->execute([$userId, $status]);
     		
     	    if($query->rowCount()) {
-    	    	?>
+
+                ?>
                 <p>Click on the order ID to check the contents of your order.</p>
     	    	<table border="0">
     	            <tr>
@@ -30,10 +31,10 @@
     			<th>Status</th>
     		    </tr>
     		<?php
+
     		while($row = $query->fetch(PDO::FETCH_ASSOC) ){
     		    ?>
     		    <tr>
-    		    	
     			<td><a href="order.php?id=<?php echo $row["order_id"]; ?>"><?php echo $row["order_id"];?></a></td>
                         <td><?php echo $row["date_stamp"]; ?></td>
     		    	<td><?php echo "In progress"; ?></td>
@@ -42,6 +43,7 @@
     		}?>
     	        </table>
     		<?php
+
     	    } else {
     		echo "You have no active orders.";
     	    }
@@ -53,35 +55,39 @@
     <h2>Order history:</h2><br>
     <?php
     	try{
-    		$userId = $_SESSION["userId"];
-    		$status = "sent";
+    	    $userId = $_SESSION["userId"];
+    	    $status = "sent";
     		
-    		$query = $pdo->prepare('SELECT * FROM orders WHERE user_id = ? AND status = ?');
-    		$query->execute([$userId, $status]);
+    	    $query = $pdo->prepare('SELECT * FROM orders WHERE user_id = ? AND status = ?');
+    	    $query->execute([$userId, $status]);
     		
-    		if($query->rowCount()) {
-    			?>
-    			<table border="0">
-    				<tr>
-    					<th>Order ID</th>
-    					<th>Date</th>
-    					<th>Status</th>
-    				</tr>
-    			<?php
-    			while($row = $query->fetch(PDO::FETCH_ASSOC) ){
-    				?>
-    					<tr>
-    						<td><a href="order.php?<?php echo $row["order_id"]; ?>"><?php echo $row["order_id"];?></a></td>
-    						<td><?php echo $row["date_stamp"]; ?></td>
-    						<td><?php echo "Sent"; ?></td>
-    					</tr>
-    				<?php	
-    			}?>
-    			</table>
+    	    if($query->rowCount()) {
+    	    	?>
+    		<table border="0">
+    		    <tr>
+    			<th>Order ID</th>
+    			<th>Date</th>
+    			<th>Status</th>
+    		    </tr>
     		<?php
+    		while($row = $query->fetch(PDO::FETCH_ASSOC) ){
+    		?>
+    		    <tr>
+    			<td><a href="order.php?<?php echo $row["order_id"]; ?>"><?php echo $row["order_id"];?></a></td>
+    			<td><?php echo $row["date_stamp"]; ?></td>
+    			<td><?php echo "Sent"; ?></td>
+    		    </tr>
+    		<?php	
+    		}
+                
+                ?>
+                </table>
+    		<?php
+
     		} else {
     			echo "You have no order history.";
     		}
+
     	} catch (PDOException $e) {
     		echo "Error: " . $e->getMessage();
     	}
