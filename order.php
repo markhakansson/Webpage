@@ -24,6 +24,9 @@
         $stmt = $pdo->prepare("SELECT * FROM order_specifics WHERE order_id = ?");
         $stmt->execute([$orderId]);
         
+		$pdo2 = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+		$pdo2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
         if($stmt->rowCount()) {
 
             ?>
@@ -40,7 +43,7 @@
             // Problem here is that the same PDO is used for queries. Gives no results in $prodQuery.... 
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $prodId = $row["product_id"];
-                $prodQuery = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
+                $prodQuery = $pdo2->prepare("SELECT * FROM products WHERE product_id = ?");
                 $prodQuery->execute([$productId]);
                 $product = $prodQuery->fetch(PDO::FETCH_ASSOC);
 
