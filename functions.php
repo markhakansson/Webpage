@@ -18,10 +18,10 @@
             }
        }
 	   
-	   function getUserPosition($user_id, $pdo) {
+        function getUserPosition($user_id, $pdo) {
 		   $stmt =  $pdo->prepare("SELECT role FROM users WHERE user_id = ?");
 		   $stmt->execute([$user_id]);
-		   $row = $stm->fetchColumn();
+		   $row = $stmt->fetchColumn();
 		   return $row;
 	   }
 	   
