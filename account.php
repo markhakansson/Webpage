@@ -22,6 +22,7 @@
     		
     	    if($query->rowCount()) {
     	    	?>
+                <p>Click on the order ID to check the contents of your order.</p>
     	    	<table border="0">
     	            <tr>
     			<th>Order ID</th>
@@ -32,8 +33,9 @@
     		while($row = $query->fetch(PDO::FETCH_ASSOC) ){
     		    ?>
     		    <tr>
-    		    	<td><?php echo $row["order_id"]; ?></td>
-    		    	<td><?php echo $row["date_stamp"]; ?></td>
+    		    	
+    			<td><a href="order.php?id=<?php echo $row["order_id"]; ?>"><?php echo $row["order_id"];?></a></td>
+                        <td><?php echo $row["date_stamp"]; ?></td>
     		    	<td><?php echo "In progress"; ?></td>
     		    </tr>
     		    <?php	
@@ -69,8 +71,7 @@
     			while($row = $query->fetch(PDO::FETCH_ASSOC) ){
     				?>
     					<tr>
-    						<td><a href="order.php?<?php echo $row["order_id"]; ?>">
-									<?php echo $row["order__id"];?></a></td>
+    						<td><a href="order.php?<?php echo $row["order_id"]; ?>"><?php echo $row["order_id"];?></a></td>
     						<td><?php echo $row["date_stamp"]; ?></td>
     						<td><?php echo "Sent"; ?></td>
     					</tr>
@@ -95,10 +96,10 @@
     ?>
 	<!--
     <form method="post">		
-    	Fullname: <br><input type="text" name="fullname" placeholder = <?php echo $row["name"];?>><br> 
-    	Address: <br><input type="text" name="address" placeholder = <?php echo $row["address"];?>><br>
-    	Phone: <br><input type="text" name="phone" placeholder = <?php echo $row["phone"];?>><br>
-    	Email: <br><input type="text" name="email" placeholder = <?php echo $row["email"];?>><br>
+    	Fullname: <br><input type="text" name="fullname" placeholder = name   <br> 
+    	Address: <br><input type="text" name="address" placeholder =  address <br>
+    	Phone: <br><input type="text" name="phone" placeholder = phone <br>
+    	Email: <br><input type="text" name="email" placeholder = email <br>
     	New password: <br><input type="password" name="newpass"><br> 
     	Old password: <br><input type="password" name="oldpass"><br>
     	<input type="submit" name="submit" value="Update">
