@@ -10,4 +10,10 @@
 		$row = $stmt->fetch();
 		return $row;
 	}
+
+       function redirectIfNotLoggedIn() {
+            if(!isset($_SESSION["userId"])) {
+                header("Location: index.php");
+            }
+       }
 ?>
