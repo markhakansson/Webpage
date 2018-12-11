@@ -69,7 +69,8 @@
     			while($row = $query->fetch(PDO::FETCH_ASSOC) ){
     				?>
     					<tr>
-    						<td><?php echo $row["order_id"]; ?></td>
+    						<td><a href="order.php?<?php echo $row["order_id"]; ?>">
+									<?php echo $row["order__id"];?></a></td>
     						<td><?php echo $row["date_stamp"]; ?></td>
     						<td><?php echo "Sent"; ?></td>
     					</tr>
@@ -92,6 +93,7 @@
     	$query->execute([$userId]);
     	$row = $query->fetch(PDO::FETCH_ASSOC);
     ?>
+	<!--
     <form method="post">		
     	Fullname: <br><input type="text" name="fullname" placeholder = <?php echo $row["name"];?>><br> 
     	Address: <br><input type="text" name="address" placeholder = <?php echo $row["address"];?>><br>
@@ -101,6 +103,7 @@
     	Old password: <br><input type="password" name="oldpass"><br>
     	<input type="submit" name="submit" value="Update">
     </form>
+	-->
 </div>
 
 
