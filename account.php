@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include 'connect.php';
     include 'functions.php';
     include 'header.php';
@@ -9,13 +8,13 @@
 ?>
 
 
-<div class = "account-page">
+<div class="body_wrap" id="account">
 	
-    <h2>Active orders:</h2><br>
+    <h2>Active orders:</h2>
     <?php
     	try{
     	    $userId = $_SESSION["userId"];
-    	    $status = "in_progress";
+    	    $status = 2;
     		
     	    $query = $pdo->prepare('SELECT * FROM orders WHERE user_id = ? AND status = ?');
     	    $query->execute([$userId, $status]);
@@ -23,7 +22,7 @@
     	    if($query->rowCount()) {
 
                 ?>
-                <p>Click on the order ID to check the contents of your order.</p>
+                <p><span>Click on the order ID to check the contents of your order.</span></p>
     	    	<table border="0">
     	            <tr>
     			<th>Order ID</th>
@@ -45,18 +44,18 @@
     		<?php
 
     	    } else {
-    		echo "You have no active orders.";
+    		echo "<span>You have no active orders.</span>";
     	    }
     	} catch (PDOException $e) {
     		echo "Error: " . $e->getMessage();
     	}	
     ?>
 	
-    <h2>Order history:</h2><br>
+    <h2>Order history:</h2>
     <?php
     	try{
     	    $userId = $_SESSION["userId"];
-    	    $status = "sent";
+    	    $status = 3;
     		
     	    $query = $pdo->prepare('SELECT * FROM orders WHERE user_id = ? AND status = ?');
     	    $query->execute([$userId, $status]);
@@ -72,11 +71,11 @@
     		<?php
     		while($row = $query->fetch(PDO::FETCH_ASSOC) ){
     		?>
-    		    <tr>
+    		   <span> <tr>
     			<td><a href="order.php?<?php echo $row["order_id"]; ?>"><?php echo $row["order_id"];?></a></td>
     			<td><?php echo $row["date_stamp"]; ?></td>
     			<td><?php echo "Sent"; ?></td>
-    		    </tr>
+    		    </tr></span>
     		<?php	
     		}
                 
@@ -85,7 +84,7 @@
     		<?php
 
     		} else {
-    			echo "You have no order history.";
+    			echo "<span>You have no order history.</span>";
     		}
 
     	} catch (PDOException $e) {
@@ -93,24 +92,20 @@
     	}
     ?>
 
-    <h2>Update your information:</h2><br>
+    <h2>Update your information:</h2>
     <?php
     	$userId = $_SESSION["userId"];
     	$query = $pdo->prepare('SELECT * FROM customers WHERE user_id = ?');
     	$query->execute([$userId]);
     	$row = $query->fetch(PDO::FETCH_ASSOC);
     ?>
-	<!--
-    <form method="post">		
-    	Fullname: <br><input type="text" name="fullname" placeholder = name   <br> 
-    	Address: <br><input type="text" name="address" placeholder =  address <br>
-    	Phone: <br><input type="text" name="phone" placeholder = phone <br>
-    	Email: <br><input type="text" name="email" placeholder = email <br>
-    	New password: <br><input type="password" name="newpass"><br> 
-    	Old password: <br><input type="password" name="oldpass"><br>
+    <form action="php_scripts/updateInformation.php" method="post">		
+    	Fullname: <br><input type="text" name="fullname" placeholder = <?php echo $row["name"]; ?>><br> 
+    	Address: <br><input type="text" name="address" placeholder = <?php echo $row["address"];?>><br>
+    	Phone: <br><input type="text" name="phone" placeholder = <?php echo $row["phone"];?>><br>
+    	Email: <br><input type="text" name="email" placeholder = <?php echo $row["email"];?>><br>
     	<input type="submit" name="submit" value="Update">
     </form>
-	-->
 </div>
 
 

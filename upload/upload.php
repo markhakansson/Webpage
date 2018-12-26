@@ -1,19 +1,9 @@
 <?php
-include 'connect.php';
+    include 'connect.php';
+    include 'functions.php';
+    include 'header.php';
+    
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-input {
-	margin-top: 5px;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-
-<div class="addproduct">
 <form action='postProduct.php' method='post' enctype="multipart/form-data">
 	<h3>Add a product<h3>
 	<input name='name' type='text' placeholder='Enter product name'>
@@ -26,5 +16,3 @@ input {
 </form>
 </div>
 
-</body>
-</html>

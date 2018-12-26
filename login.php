@@ -1,10 +1,7 @@
 <?php
 	include 'login_backend.php';
-    	header('Content-Type: text/html; charset=ISO-8859-1');
+    header('Content-Type: text/html; charset=ISO-8859-1');
 	include 'header.php'
-	
-
-	
 ?>
 <div class="login_container">		
 	<?php

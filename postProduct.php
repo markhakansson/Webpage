@@ -1,9 +1,11 @@
 <?php
-	include 'connect.php';
-
+    include 'connect.php';
+    include 'functions.php';
+    include 'header.php';
+    
+?>
+<?php
 	try{
-
-
    
 	
 	$stmt = $pdo->prepare("INSERT INTO products (name, description, price, stock, picture)
@@ -21,18 +23,14 @@
 	$stock = $_POST["stock"];
 	$image = 'images/'.$_FILES["fileToUpload"]["name"];
 	 
-	
+		
 	$stmt->execute();
 	
 	echo 'posted!';
-
 }
 catch(PDOException $e)
 {
 	echo "Error: " . $e->getMessage();
 }
-
 $pdo = null;
 ?>
-
-

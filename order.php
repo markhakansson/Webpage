@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include 'connect.php';
     include 'functions.php';
     include 'header.php';
@@ -39,17 +38,14 @@
             
             $result = $stmt->fetchAll();
             $sum = 0;
-
             foreach($result as $row) {
                 $prodId = $row["product_id"];
                 $prodAmount = $row["amount"];
-
                 $prodQuery = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
                 $prodQuery->execute([$prodId]);
                 $product = $prodQuery->fetch();
                 
                 $sum = $sum + $product["price"];               
-
                 ?>
                 <tr>
                 <td><?php echo $product["name"];?></td>
@@ -68,7 +64,6 @@
             </table>
             <?php
         }
-
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();    
     }
