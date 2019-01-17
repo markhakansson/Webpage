@@ -16,7 +16,7 @@
     }
 ?>    
 
-<div class = "order-page">
+<div class="body_wrap" id="account">
     <h2>Order specification ID #<?php echo $orderId; ?>:</h2>
     <?php
     try{
@@ -45,14 +45,14 @@
                 $prodQuery->execute([$prodId]);
                 $product = $prodQuery->fetch();
                 
-                $sum = $sum + $product["price"];               
+                $sum = $sum + $prodAmount*$row["price"];               
                 ?>
                 <tr>
                 <td><?php echo $product["name"];?></td>
                 <td><?php echo $prodId;?></td>
                 <td><?php echo $row["amount"];?></td>
-                <td><?php echo $product["price"];?></td>
-                <td><?php echo $prodAmount*$product["price"];?></td>
+                <td><?php echo $row["price"];?></td>
+                <td><?php echo $prodAmount*$row["price"];?></td>
                 </tr>
                 <?php
             } ?>

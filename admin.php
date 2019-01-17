@@ -1,7 +1,8 @@
 <?php
+	ob_start();
+	include 'header.php';
     include 'connect.php';
     include 'functions.php';
-    include 'header.php';
 
     redirectIfNotLoggedIn();    
     redirectIfNotEmployeeOrAdmin($_SESSION["userId"],$pdo);

@@ -1,8 +1,5 @@
 <?php
-error_reporting(E_ERROR); // because two session_start() is called. does work it's ok
-session_start();
-include 'connect.php';
-    $usernameErr = $passwordErr = $robotCheckErr = $loginMsg = "";
+    $usernameErr = $passwordErr = $loginMsg = "";
     try{
         if($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Trim unnecessary characters
@@ -16,48 +13,42 @@ include 'connect.php';
 			}
 			
 			if(!empty($_POST["password"])) {
-				$password = $_POST["password"]; // use htmlspecialchars here
+				$password = $_POST["password"]; 
 			} else {
 				$passwordErr = "Password field is empty!";
 			}
 			
-			if(!empty($_POST["robotCheck"])) {
-				$robotCheck = $_POST["robotCheck"];
-			} else {
-				$robotCheckErr = "SO YOU ARE A ROBOT HUH?!";
+			// Get password from database
+			$pwQuery = $pdo->prepare("SELECT password FROM users WHERE username = ?");
+			$pwQuery->execute([$username]);
+			$passwordHash = $pwQuery->fetchColumn();
+			
+			// Verify password with the stored one in DB
+			if(password_verify($password, $passwordHash)) {
+				$idQuery = $pdo->prepare("SELECT user_id FROM users WHERE username = ?");
+				$idQuery->execute([$username]);
+				$userId = $idQuery->fetchColumn();
+				$nameQuery = $pdo->prepare("SELECT name FROM customers WHERE user_id = ?");
+				$nameQuery->execute([$userId]);
+				$fullname = $nameQuery->fetchColumn();
+				$roleQuery = $pdo->prepare("SELECT role FROM users WHERE user_id = ?");
+				$roleQuery->execute([$userId]);
+				$role = $roleQuery->fetchColumn();
+				
+				// If user is found update session variables
+				if($userId) {
+					$_SESSION['userId'] = $userId;
+					$_SESSION["fullname"] = $fullname;
+					$loginMsg = "Login successful! Welcome $fullname!";
+					if($role = "1") {redirectToUrl("index.php");}
+					if($role = "2" || $role = "3"){redirectToUrl("admin.php");}
+				} else {
+					$loginMsg = "Wrong username or password!";
+				}
 			}
-			
-			$idQuery = $pdo->prepare("SELECT user_id FROM users WHERE username = ? AND password = ? ");
-			$idQuery->execute([$username, $password]);
-			$userId = $idQuery->fetchColumn();
-			$nameQuery = $pdo->prepare("SELECT name FROM customers WHERE user_id = ?");
-			$nameQuery->execute([$userId]);
-			$fullname = $nameQuery->fetchColumn();
-			$roleQuery = $pdo->prepare("SELECT role FROM users WHERE user_id = ?");
-			$roleQuery->execute([$userId]);
-			$role = $roleQuery->fetchColumn();
-			
-			//$userId = $idQuery->fetchColumn();
-			//$nameQuery = $pdo->prepare("SELECT name FROM customers WHERE user_id = ?");
-			//$nameQuery->execute([$userId]);
-			//$fullname = $nameQuery->fetchColumn();
-
-			
-            if($userId && !$robotCheckErr) {
-                $_SESSION['userId'] = $userId;
-                $_SESSION["fullname"] = $fullname;
-                $loginMsg = "Login successful! Welcome $fullname!";
-				echo $_SESSION['userId'];
-				
-				if($role = "1") {header("Location: index.php");}
-				if($role = "2" || $role = "3"){header("Location: admin.php");}
-				
-            } else {
-                $loginMsg = "Wrong username or password!";
-            }
         }
     } catch(PDOException $e) {
-        //echo "Error, please contact admin. Error code: " . $e->getMessage();
+        echo "Error, please contact admin. Error code: " . $e->getMessage();
     }	
 	
 ?>

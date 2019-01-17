@@ -9,12 +9,15 @@ try{
 	$oId = $_POST['orderId'];
 	
 	// UPDATE THE CART TO STATUS ORDERED
-	$stmt = ("UPDATE orders SET status = '2'
+	$stmt = (
+		"UPDATE orders 
+		SET status = '2'
 		WHERE user_id = '$uId'
 		AND order_id = '$oId'
-		AND status = '1'");
-		$pdo->prepare($stmt);
-		$pdo->exec($stmt);
+		AND status = '1'"
+		);
+	$pdo->prepare($stmt);
+	$pdo->exec($stmt);
 	
 	// SUBTRACT THE AMOUNT IN THE ORDER SO THE STORE CAN REPRESENT ACCURATE VALUE
 	$stmt =  $pdo->query("SELECT  order_specifics.amount, products.product_id FROM products 
@@ -28,6 +31,16 @@ try{
 		$pdo->prepare($stmt);
 		$pdo->exec($stmt);	
 	}
+	
+	// UPDATE PRICE IN ORDER_SPECIFICS TO PRODUCT PRICE
+	$stmt = $pdo->prepare("
+		UPDATE order_specifics
+		INNER JOIN products ON order_specifics.product_id = products.product_id
+		SET order_specifics.price = products.price
+		WHERE order_specifics.order_id = ?
+		");
+	$stmt->execute([$oId]);
+	
 	$pdo->commit();
 		/* Subtract amount available in store */
 		header('Location: ../purchase.php');

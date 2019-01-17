@@ -1,16 +1,22 @@
 <?php	
-	include 'connect.php';
+	ob_start();
 	include 'header.php';
+	include 'connect.php';
+
 	
 	// Check if cart is empty
 	$total = 0;
 	$uId = $_SESSION['userId'];
-	$stmt = $pdo->query("SELECT price, name, picture, products.product_id, order_specifics.amount, orders.order_id FROM products 
+	$stmt = $pdo->query("SELECT products.price, name, picture, products.product_id, order_specifics.amount, orders.order_id FROM products 
 	INNER JOIN order_specifics ON order_specifics.product_id = products.product_id
 	INNER JOIN orders ON order_specifics.order_id = orders.order_id
 	WHERE orders.user_id = '$uId' AND orders.status = '1'");
 	$result = $stmt->fetchAll();
 	//loop out items
+	
+	if(empty($result)){
+		echo "Empty!";
+	}
 	
 	foreach($result as $row){
 		$total += $row[0]*$row[4];

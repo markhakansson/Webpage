@@ -1,4 +1,5 @@
 <?php
+	ob_start();
     include 'connect.php';
     include 'functions.php';
     include 'header.php';
@@ -6,7 +7,6 @@
     redirectIfNotLoggedIn();
 
 ?>
-
 
 <div class="body_wrap" id="account">
 	
@@ -16,7 +16,8 @@
     	    $userId = $_SESSION["userId"];
     	    $status = 2;
     		
-    	    $query = $pdo->prepare('SELECT * FROM orders WHERE user_id = ? AND status = ?');
+    	    $query = $pdo->prepare('SELECT * FROM orders 
+									WHERE user_id = ? AND status = ?');
     	    $query->execute([$userId, $status]);
     		
     	    if($query->rowCount()) {
@@ -57,7 +58,8 @@
     	    $userId = $_SESSION["userId"];
     	    $status = 3;
     		
-    	    $query = $pdo->prepare('SELECT * FROM orders WHERE user_id = ? AND status = ?');
+    	    $query = $pdo->prepare('SELECT * FROM orders 
+									WHERE user_id = ? AND status = ?');
     	    $query->execute([$userId, $status]);
     		
     	    if($query->rowCount()) {
@@ -95,7 +97,8 @@
     <h2>Update your information:</h2>
     <?php
     	$userId = $_SESSION["userId"];
-    	$query = $pdo->prepare('SELECT * FROM customers WHERE user_id = ?');
+    	$query = $pdo->prepare('SELECT * FROM customers 
+								WHERE user_id = ?');
     	$query->execute([$userId]);
     	$row = $query->fetch(PDO::FETCH_ASSOC);
     ?>

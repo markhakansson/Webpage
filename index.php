@@ -1,9 +1,7 @@
-﻿<?php 
-	include 'connect.php'; 
-	include 'functions.php';
+<?php 
+	ob_start();
 	include 'header.php';
-
-
+	include 'functions.php';
 ?>
 
 	

@@ -1,9 +1,7 @@
 <?php 
+	include 'header.php';
 	include 'connect.php'; 
 	include 'functions.php';
-	include 'header.php';
-
-
 ?>
 <head>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -41,7 +39,7 @@ $(document).ready(function(){
         <div class="result"></div>
     </div>
 		
-			<!-- Skapar en länk som leder till en recension samt ett par block som håller de olika objekten !-->
+			<!-- Skapar en lÃ¤nk som leder till en recension samt ett par block som hÃ¥ller de olika objekten !-->
 			<?php 
 				
 				/*for($x=0; $x<10; $x++){

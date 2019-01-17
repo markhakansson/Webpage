@@ -1,23 +1,28 @@
 <?php
-include '../connect.php';
-session_start();
-if(isset($_SESSION['userId']) && isset($_POST['submit1'])){
+	ob_start();
+	session_start();
+	include '../connect.php';
+	include '../functions.php';
 	
-	$uId = $_SESSION['userId'];
-	$pId = $_POST['prodId'];
-	$amount = $_POST['amount'];
-	$oId = $_POST['orderId'];
-	$stmt = $pdo->prepare("UPDATE order_specifics 
-	SET order_specifics.amount='$amount'
-	WHERE order_specifics.order_id = '$oId'
-	AND order_specifics.product_id = '$pId'");
-	$stmt->execute();
-	if($_POST['update'] == 1){
+	if(isset($_SESSION['userId']) && isset($_POST['submit1'])){
 		
-		$id = $_POST['page_id'];
-		header("location:../product_page.php?id=$id");
-	}else{
-		header("location:../cart.php");
+		
+		$uId = $_SESSION['userId'];
+		$pId = $_POST['prodId'];
+		$amount = $_POST['amount'];
+		$oId = $_POST['orderId'];
+		$stmt = $pdo->prepare("UPDATE order_specifics os
+								SET os.amount= ?
+								WHERE os.order_id = ? AND os.product_id = ?");
+		$stmt->execute([$amount, $oId, $pId]);
+				
+		if($_POST['update'] == 1){
+			$id = $_POST['page_id'];
+			redirectToUrl("../product_page.php?id=$id");
+			//header("location:../product_page.php?id=$id");
+		}else{
+			redirectToUrl("../cart.php");
+			//header("location:../cart.php");
+		} 
 	}
-}
 ?>

@@ -1,17 +1,17 @@
-﻿<?php
+<?php
+	ob_start();
+	include 'header.php';
 	include 'connect.php';
 	include 'functions.php';
-	include 'header.php';
 
 	$id = $_GET['id'];
 	$row = selProdID($pdo, $id);
 ?>
-	<div class="body_wrap centring box">
-		<!-- Rubrik !-->
-		
-	<?php
-		
-echo'
+
+<div class="body_wrap centring box">		
+<?php
+	$uId = $_SESSION['userId'];
+	echo'
 	<div id="header" class="centring"><h1>'.$row[3].'</h1></div>
 		
 		
@@ -24,51 +24,47 @@ echo'
 			<p>'.$row[4].'</p>
 		</div>
 		<div class="text_wrap">
-			<p>'.$row[4].'</p>
-		</div>
-		<div class="text_wrap">
-		<p>Price: '.$row[2].' SEK</p>';
+		<p>Price: '.$row["price"].' SEK</p>';
+		
 		if(empty($_SESSION['userId'])){
 			echo '<p>Please <a href="login.php">Login</a> To Purchase.</p>';
 		}else{
-		$uId = $_SESSION['userId'];
-		$stmt = $pdo->query("SELECT * FROM order_specifics INNER JOIN orders ON order_specifics.order_id = orders.order_id
-		WHERE orders.user_id = $uId AND orders.status = '1' AND order_specifics.product_id = $id");
-		$check = $stmt->fetchAll();
-		if(empty($check))
-		{
-			echo'
-				
-		<form action="php_scripts/addItem.php" method="post" id="form1">
-			<input type="hidden" value="'.$row[2].'" name="prodId">
-			<input type="hidden" value="'.$_SESSION['userId'].'" name="userId">
-			<input type="submit" value="Add To Cart" name="submit1" />
-			<select name="amount">"';
-			for($x=1;$x < 11;$x++){
-				echo '<option value="'.$x.'">'.$x.'</option>';
-			}
-			echo '</select>
-			
-		</form>
-		</div>
-		</div>';
-		} else {
+			$stmt = $pdo->query("SELECT * FROM order_specifics INNER JOIN orders ON order_specifics.order_id = orders.order_id
+			WHERE orders.user_id = $uId AND orders.status = '1' AND order_specifics.product_id = $id");
+			$check = $stmt->fetchAll();
 		
-		echo '<form action="php_scripts/updateAmount.php" method="post" id="form1">
-			<input type="hidden" value="'.$row[2].'" name="prodId">
-			<input type="hidden" value="1" name="update">
-			<input type="hidden" value="'.$_GET['id'].'" name="page_id">
-			<input type="hidden" value="'.$row[1].'" name="orderId">
-			<input type="submit" value="Update" name="submit1" />
-			<select name="amount">"';
-			for($x=1;$x < 11;$x++){
-				echo '<option value="'.$x.'">'.$x.'</option>';
+			// Add item to cart if cart is emtpy. Otherwise update the cart.
+			if(empty($check)){
+				echo'
+					
+				<form action="php_scripts/addItem.php" method="post" id="form1">
+					<input type="hidden" value="'.$row[2].'" name="prodId">
+					<input type="hidden" value="'.$_SESSION['userId'].'" name="userId">
+					<input type="submit" value="Add To Cart" name="submit1" />
+					<select name="amount">"';
+					for($x=1;$x < 11;$x++){
+						echo '<option value="'.$x.'">'.$x.'</option>';
+					}
+					echo '</select>';
+
+			} else {
+				$stmt = $pdo->prepare("SELECT order_id FROM orders
+										WHERE user_id = ? AND status = '1' ");
+				$stmt->execute([$uId]);
+				$orderId = $stmt->fetchColumn();
+				echo '<form action="php_scripts/updateAmount.php" method="post" id="form1">
+					<input type="hidden" value="'.$row[2].'" name="prodId">
+					<input type="hidden" value="1" name="update">
+					<input type="hidden" value="'.$_GET['id'].'" name="page_id">
+					<input type="hidden" value="'.$orderId.'" name="orderId"> 
+					<input type="submit" value="Update" name="submit1" />
+					<select name="amount">"';
+					for($x=1;$x < 11;$x++){
+						echo '<option value="'.$x.'">'.$x.'</option>';
+					}
+					echo '</select>';
 			}
-			echo '</select>
-			
-		</form>
-		</div>
-		</div>';}
+			echo '</form></div></div>';
 		}
 		echo'
 	</div>
