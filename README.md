@@ -35,9 +35,13 @@ mysql> source /dir/to/dbinit/dbInit.sql
 ```
 
 ## 4. Credits
-
+- [JQuery](http://jquery.com/)
+- [Google Fonts](https://fonts.google.com/)
 ## 5. Authors
-
+- [Ticou93](https://github.com/Ticou93)
+- [Kevintrf](https://github.com/Kevintrf)
+- [chrsea-6](https://github.com/chrsea-6)
+- [markhakansson](https://github.com/markhakansson)
 ## 6. Demo
 Link to live demo below:
 
@@ -46,3 +50,4 @@ Link to live demo below:
 Test user:  
 username: user  
 password: password  
+
